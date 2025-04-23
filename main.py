@@ -1,6 +1,9 @@
+#IMPORTS
 import pygame
 from constants import *
 from player import *
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -15,10 +18,17 @@ def main():
             if event.type == pygame.QUIT:
                 return
         
-        #Drawing the character
-        screen.fill(color=000,rect=None,special_flags=0)
-        player.draw(screen)
         
+        
+        #Coloring the screen
+        screen.fill(color=000,rect=None,special_flags=0)
+        
+        
+        
+        #Drawing the character
+        player.draw(screen)
+        #movement
+        player.update(dt)
         #Control FPS
         pygame.display.flip()
         time_control.tick(60)
