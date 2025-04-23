@@ -23,12 +23,12 @@ def main():
         #Coloring the screen
         screen.fill(color=000,rect=None,special_flags=0)
         
-        
-        
         #Drawing the character
         player.draw(screen)
-        #movement
+        
+        #rotate
         player.update(dt)
+        
         #Control FPS
         pygame.display.flip()
         time_control.tick(60)
