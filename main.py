@@ -9,27 +9,36 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     time_control = pygame.time.Clock()
     dt = 0
+    
+    
+    # creating groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    
+    # adding player object to the groups
+    Player.containers = (updatable, drawable)
+    
+    #setting player to an instance variable
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT /2)
     
-    #GAME LOOP
+    # GAME LOOP
     while True:
-        #Exit button
+        # Exit button
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         
+        # Coloring the screen
+        screen.fill(000)
         
+        # rotate
+        updatable.update(dt)
         
-        #Coloring the screen
-        screen.fill(color=000,rect=None,special_flags=0)
-        
-        #Drawing the character
-        player.draw(screen)
-        
-        #rotate
-        player.update(dt)
-        
-        #Control FPS
+        # Drawing the character
+        for d in drawable:
+            d.draw(screen)
+
+        # Control FPS
         pygame.display.flip()
         time_control.tick(60)
         dt = time_control.tick(60) / 1000
