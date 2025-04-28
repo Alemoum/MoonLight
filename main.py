@@ -4,7 +4,8 @@ from constants import *
 from player import *
 from asteroid import *
 from asteroid_field import *
-
+from circleshape import *
+import sys
 
 def main():
     pygame.init()
@@ -45,10 +46,15 @@ def main():
         # Coloring the screen
         screen.fill(000)
         
-        # rotate
+        # update step
         updatable.update(dt)
         
-        # Drawing the character
+        for a in asteroid_group:
+            if a.collisions(player) == True:
+                print("GAME OVER!")
+                sys.exit()
+                
+        # Drawing step
         for d in drawable:
             d.draw(screen)
 
