@@ -2,6 +2,8 @@
 import pygame
 from constants import *
 from player import *
+from asteroid import *
+from asteroid_field import *
 
 
 def main():
@@ -11,15 +13,27 @@ def main():
     dt = 0
     
     
-    # creating groups
+    # creating groups to player
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    
+    # creating a group to asteroids
+    asteroid_group = pygame.sprite.Group()
     
     # adding player object to the groups
     Player.containers = (updatable, drawable)
     
-    #setting player to an instance variable
+    #adding asteroid to the groups
+    Asteroid.containers = (asteroid_group, updatable, drawable)
+    
+    # adding asteroid field to the group
+    AsteroidField.containers = (updatable)
+    
+    # setting player to an instance variable
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT /2)
+    
+    # creating an asteroid field object
+    AsteroidField()
     
     # GAME LOOP
     while True:
@@ -43,7 +57,7 @@ def main():
         time_control.tick(60)
         dt = time_control.tick(60) / 1000
         
-    
+        
     
 if __name__ == "__main__":
     main()
