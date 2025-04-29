@@ -64,6 +64,13 @@ def main():
             if a.collisions(player) == True:
                 print("GAME OVER!")
                 sys.exit()
+        
+        # Collision of asteroids with bullets
+        for a in asteroid_group:
+            for bullet in shoots_group:
+                if a.collisions(bullet) == True:
+                    pygame.sprite.Sprite.kill(a)
+                    pygame.sprite.Sprite.kill(bullet)
                 
         # Drawing step
         for d in drawable:
