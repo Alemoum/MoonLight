@@ -1,11 +1,15 @@
 #IMPORTS
 import pygame
+import sys
+
 from constants import *
 from player import *
 from asteroid import *
 from asteroid_field import *
 from circleshape import *
-import sys
+from shoot import *
+
+
 
 def main():
     pygame.init()
@@ -21,6 +25,9 @@ def main():
     # creating a group to asteroids
     asteroid_group = pygame.sprite.Group()
     
+    # creating a group to shoots
+    shoots_group = pygame.sprite.Group()
+    
     # adding player object to the groups
     Player.containers = (updatable, drawable)
     
@@ -29,6 +36,9 @@ def main():
     
     # adding asteroid field to the group
     AsteroidField.containers = (updatable)
+    
+    # adding shoot to group
+    Shoot.containers = (shoots_group, updatable, drawable)
     
     # setting player to an instance variable
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT /2)
@@ -49,6 +59,7 @@ def main():
         # update step
         updatable.update(dt)
         
+        # Collision of asteroids an player
         for a in asteroid_group:
             if a.collisions(player) == True:
                 print("GAME OVER!")
