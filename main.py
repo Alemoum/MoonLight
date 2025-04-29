@@ -69,10 +69,10 @@ def main():
         for a in asteroid_group:
             for bullet in shoots_group:
                 if a.collisions(bullet) == True:
-                    pygame.sprite.Sprite.kill(a)
-                    pygame.sprite.Sprite.kill(bullet)
+                    a.split()
+                    bullet.kill()
                 
-        # Drawing step
+        # Drawing stepad
         for d in drawable:
             d.draw(screen)
 
